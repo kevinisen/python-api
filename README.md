@@ -93,12 +93,14 @@ J'ai dû concevoir une logique de tri personnalisée pour gérer plusieurs crit�
 
 # Exemple de tri par priorité avec gestion de la date
 
+```python
 def sort_by_priority(tickets, priority_order, date_order):
 reverse_order = (date_order == "asc" or date_order is None)
 high = sorted([t for t in tickets if t["priority"] == "High"], key=lambda t: t["createdAt"], reverse=reverse_order)
 medium = sorted([t for t in tickets if t["priority"] == "Medium"], key=lambda t: t["createdAt"], reverse=reverse_order)
 low = sorted([t for t in tickets if t["priority"] == "Low"], key=lambda t: t["createdAt"], reverse=reverse_order)
 return high + medium + low
+```
 
 Compréhension des codes HTTP
 L'utilisation de FastAPI m'a permis de bien comprendre les codes de réponse :
