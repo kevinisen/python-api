@@ -1,5 +1,6 @@
 from fastapi import FastAPI, Query
 from fastapi import HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from app.models import TicketCreate, TicketResponse, TicketUpdate, Status, Priority
 from app.utils import load_tickets, save_tickets, sort_tickets
 from app.script import count_tickets_by_status
@@ -7,6 +8,13 @@ from typing import List, Optional
 
 app = FastAPI()
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:5173/"],  # ou [""] en dev
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @app.get("/tickets", response_model=List[TicketResponse])
 def get_tickets(
