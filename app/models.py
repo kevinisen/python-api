@@ -24,7 +24,6 @@ class TicketCreate(BaseModel):
     priority: Priority
     status: Status
     tags: List[str]
-    createdAt: date
 
 class TicketUpdate(BaseModel):
     title: Optional[str] = None

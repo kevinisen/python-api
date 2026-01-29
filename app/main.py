@@ -5,6 +5,7 @@ from app.models import TicketCreate, TicketResponse, TicketUpdate, Status, Prior
 from app.utils import load_tickets, save_tickets, sort_tickets
 from app.script import count_tickets_by_status
 from typing import List, Optional
+from datetime import date
 
 app = FastAPI()
 
@@ -47,6 +48,7 @@ def create_ticket(ticket: TicketCreate, response_model=TicketResponse, status_co
 
     new_ticket = {
         "id": new_id,
+        "createdAt": date.today().isoformat(),
         # ** unpacking d'un dic (copie chaque clé/valeur dans ce dictionnaire) équivalent a ... en JS
         # model_dump est une fonction pydantic et cela transforme un modele Python en dictionnaire.
         **ticket.model_dump(mode="json")
