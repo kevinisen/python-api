@@ -95,18 +95,24 @@ J'ai dû concevoir une logique de tri personnalisée pour gérer plusieurs crit�
 
 ```python
 def sort_by_priority(tickets, priority_order, date_order):
-reverse_order = (date_order == "asc" or date_order is None)
-high = sorted([t for t in tickets if t["priority"] == "High"], key=lambda t: t["createdAt"], reverse=reverse_order)
-medium = sorted([t for t in tickets if t["priority"] == "Medium"], key=lambda t: t["createdAt"], reverse=reverse_order)
-low = sorted([t for t in tickets if t["priority"] == "Low"], key=lambda t: t["createdAt"], reverse=reverse_order)
-return high + medium + low
+    reverse_order = (date_order == "asc" or date_order is None)
+    high = sorted([t for t in tickets if t["priority"] == "High"], key=lambda t: t["createdAt"], reverse=reverse_order)
+    medium = sorted([t for t in tickets if t["priority"] == "Medium"], key=lambda t: t["createdAt"], reverse=reverse_order)
+    low = sorted([t for t in tickets if t["priority"] == "Low"], key=lambda t: t["createdAt"], reverse=reverse_order)
+
+    return high + medium + low
 ```
 
 Compréhension des codes HTTP
+
 L'utilisation de FastAPI m'a permis de bien comprendre les codes de réponse :
 
 200 (OK) : Retour standard pour les lectures.
+
 201 (Created) : Utilisé pour la création de tickets.
+
 204 (No Content) : Utilisé pour la suppression.
+
 422 (Unprocessable Entity) : Ce code intervient quand le JSON envoyé est valide syntaxiquement mais ne respecte pas le schéma Pydantic (mauvais type, champ manquant). La requête est bloquée par FastAPI avant même d'exécuter ma fonction.
+
 500 (Server Error) : Indique un bug dans ma logique Python.
